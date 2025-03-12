@@ -1,3 +1,0 @@
-/home/tailsmonster/Prismatic/projects/PrismaStream/bin/CMakeFiles/PrismaStream.dir
-/home/tailsmonster/Prismatic/projects/PrismaStream/bin/CMakeFiles/edit_cache.dir
-/home/tailsmonster/Prismatic/projects/PrismaStream/bin/CMakeFiles/rebuild_cache.dir
