@@ -1,0 +1,1 @@
+/sbin/c++ -Wl,--dependency-file=CMakeFiles/PrismaStream.dir/link.d CMakeFiles/PrismaStream.dir/src/main.cpp.o -o PrismaStream  -lportaudio
