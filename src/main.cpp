@@ -28,6 +28,7 @@ int main() {
     }
   }
 
+  
   // Try to use the first output-capable device
   PaDeviceIndex deviceIndex = 13;
   const PaDeviceInfo* deviceInfo = Pa_GetDeviceInfo(deviceIndex);
