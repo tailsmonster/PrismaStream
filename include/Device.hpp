@@ -2,11 +2,9 @@
 
 #include <iostream>
 #include <portaudio.h>
-#include "Metadata.h"
+#include "Init.hpp"
 
-// init PortAudio
-
-namespace App::Init {
+namespace App::Device {
   void initPortAudio();
 
   int getDeviceCount();
@@ -17,5 +15,4 @@ namespace App::Init {
   
   const PaDeviceInfo* printDeviceInfo(PaDeviceIndex idx);
 
-  void killPortAudio();
 }

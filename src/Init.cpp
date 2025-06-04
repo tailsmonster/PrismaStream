@@ -71,4 +71,8 @@ namespace App::Init {
   
     return deviceInfo;
   }
+
+  void killPortAudio() {
+    Pa_Terminate();
+  };
 }

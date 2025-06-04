@@ -11,13 +11,12 @@ int main(void) {
   if (deviceIndex == paNoDevice) 
     return 1;
   
-    
+
 
 
   int input;
   std::cin >> input;
   
 
-  Pa_Terminate();
   return 0;
 }
