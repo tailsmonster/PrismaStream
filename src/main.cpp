@@ -1,9 +1,14 @@
 #include <iostream>
 #include <portaudio.h>
-#include "../include/pa_init.hpp"
-#include "../include/stream.hpp"
+#include "Init.hpp"
+#include "Stream.hpp"
 
-int main() {
+using std::cout;
+
+int main(void);
+int main(void) {
+
+  
   PaDeviceIndex deviceIndex = initAudio();
   if (deviceIndex == paNoDevice) 
     return 1;

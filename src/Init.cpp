@@ -1,4 +1,5 @@
-#include "../include/pa_init.hpp"
+#include <iostream>
+#include "Init.hpp"
 
 PaDeviceIndex initAudio() {
   PaError err = Pa_Initialize();
@@ -6,10 +7,16 @@ PaDeviceIndex initAudio() {
     std::cerr << "PortAudio error: " << Pa_GetErrorText(err) << std::endl;
     return paNoDevice;
   }
+  // PA version info
+  std::cout << "PortAudio version: " << Pa_GetVersion() << std::endl;
+  std::cout << "Version Info: " << Pa_GetVersionInfo() << std::endl;
+
+
 
   int numDevices = Pa_GetDeviceCount();
   if (numDevices < 1) {
     std::cerr << "No audio devices found!" << std::endl;
+    std::cerr << "Pa_GetDeviceCount returned" << numDevices << std::endl;
     Pa_Terminate();
     return paNoDevice;
   }
@@ -18,10 +25,13 @@ PaDeviceIndex initAudio() {
 
   for (int i = 0; i < numDevices; i++) {
     const PaDeviceInfo* deviceInfo = Pa_GetDeviceInfo(i);
-    if (deviceInfo) 
+    if (deviceInfo) {
       std::cout << i << ": " << deviceInfo->name << " | Max Output Channels: " << deviceInfo->maxOutputChannels << std::endl;
-    else 
+    }
+    else {
       std::cerr << "Failed to get info for device " << i << std::endl;
+      return paNoDevice;
+    }
   }
 
   PaDeviceIndex deviceIndex = Pa_GetDefaultOutputDevice();
