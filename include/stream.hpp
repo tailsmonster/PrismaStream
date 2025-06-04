@@ -4,4 +4,4 @@
 #include <portaudio.h>
 
 // init PortAudio and get the default output device
-PaDeviceIndex initAudio();
+PaDeviceIndex initStream();
