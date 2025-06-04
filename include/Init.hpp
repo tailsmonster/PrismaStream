@@ -9,13 +9,5 @@
 namespace App::Init {
   void initPortAudio();
 
-  int getDeviceCount();
-  
-  void printAllDevicesInfo(int numDevices);
-  
-  PaDeviceIndex getDefaultIndex();
-  
-  const PaDeviceInfo* printDeviceInfo(PaDeviceIndex idx);
-
   void killPortAudio();
 }

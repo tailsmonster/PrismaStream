@@ -5,7 +5,6 @@
 #include "Init.hpp"
 
 namespace App::Device {
-  void initPortAudio();
 
   int getDeviceCount();
   
