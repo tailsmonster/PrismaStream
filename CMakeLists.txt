@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(PrismaStream 
-    src/main.cpp
-    src/pa_init.cpp
+    main.cpp
+    src/Init.cpp
 )
 
 target_include_directories(PrismaStream PRIVATE include)

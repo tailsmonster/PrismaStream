@@ -1,18 +1,17 @@
 #include <iostream>
 #include <portaudio.h>
+// #include <pa_linux_pulseaudio.h>
 #include "Init.hpp"
 #include "Stream.hpp"
 
-using std::cout;
-
-int main(void);
 int main(void) {
 
   
   PaDeviceIndex deviceIndex = initAudio();
   if (deviceIndex == paNoDevice) 
     return 1;
-  // amogus
+  
+    
 
 
   int input;
