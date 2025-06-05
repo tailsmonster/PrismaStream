@@ -4,6 +4,8 @@
 #include "Init.hpp"
 
 namespace Device {
+  static PaDeviceIndex selectedDevice = paNoDevice;
+
   int getDeviceCount() {
     int numDevices = Pa_GetDeviceCount();
     if (numDevices < 0) {
@@ -39,27 +41,32 @@ namespace Device {
     return defaultIdx;
   };
 
-  void printDeviceInfo(PaDeviceIndex* idx) {
+  void printDeviceInfo(const PaDeviceInfo* deviceInfo) {
     std::cout << " | Max Output Channels: " << deviceInfo->maxOutputChannels << std::endl;
   }
   
-  const PaDeviceInfo* setDevice(PaDeviceIndex* idx) {
+  void setDevice(PaDeviceIndex idx) {
     const PaDeviceInfo* deviceInfo = Pa_GetDeviceInfo(idx);
     if (!deviceInfo) {
       std::cerr << "Error: Unable to retrieve device info!" << std::endl;
       Pa_Terminate();
-      return nullptr;
+      return;
     }
-  
+    selectedDevice = idx;
     if (idx == getDefaultIndex()) {
       std::cout << "Using DEFAULT output device: " << idx << " - " << deviceInfo->name << std::endl;
     } else {
       std::cout << "Using output device: " << idx << " - " << deviceInfo->name << std::endl;
     }
   
-    printDeviceInfo();
-    std::cout << "PortAudio is initialized!" << std::endl;
-  
-    return deviceInfo;
+    printDeviceInfo(deviceInfo);
+    // return deviceInfo;
+
+    
   }
+  
+  PaDeviceIndex getSelectedDevice() {
+    return selectedDevice;
+  }
+
 }

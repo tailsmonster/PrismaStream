@@ -6,25 +6,21 @@
 
 
 namespace Init {
-  auto DEFAULT_DEVICE = Device::getDefaultIndex()
   void initPrismaStream() {
-    std::cout << "Staring PrismaStream version: " << *version << std::endl;
+    std::cout << "Starting PrismaStream version: " << version << std::endl;
     PaError err = Pa_Initialize();
     if (err != paNoError) {
       std::cerr << "PortAudio error: " << Pa_GetErrorText(err) << std::endl;
-      return paNoDevice;
+      killPrismaStream();  
     } else {
       std::cout << "===INITIALIZING PORTAUDIO API===" << std::endl;
       std::cout << "PortAudio version: " << Pa_GetVersion() << std::endl;
-      std::cout << "Version Info: " << Pa_GetVersionInfo() << std::endl << "" << std::endl;
+      std::cout << "Version Info: " << (Pa_GetVersionInfo()) << std::endl << "" << std::endl;
     }
     Device::printAllDevicesInfo(Device::getDeviceCount());
-    Device::setDevice(DEFAULT_DEVICE);
+    Device::setDevice(Device::getDefaultIndex());
+    std::cout << "PortAudio is initialized!" << std::endl;
   };
-
-
-
-
 
   void killPrismaStream() {
     Pa_Terminate();

@@ -7,6 +7,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_executable(PrismaStream 
     main.cpp
     src/Init.cpp
+    src/Device.cpp
+    src/Stream.cpp
+    src/Playback.cpp
 )
 
 target_include_directories(PrismaStream PRIVATE include)

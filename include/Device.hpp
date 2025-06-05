@@ -4,7 +4,7 @@
 #include <portaudio.h>
 #include "Init.hpp"
 
-namespace App::Device {
+namespace Device {
 
   int getDeviceCount();
   
@@ -12,8 +12,10 @@ namespace App::Device {
   
   PaDeviceIndex getDefaultIndex();
 
-  void printDeviceInfo(PaDeviceIndex* idx);
+  void printDeviceInfo(const PaDeviceInfo* deviceInfo);
   
-  const PaDeviceInfo* printDeviceInfo(PaDeviceIndex idx);
+  void setDevice(PaDeviceIndex idx);
+  
+  PaDeviceIndex getSelectedDevice();
 
 }

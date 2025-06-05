@@ -2,12 +2,12 @@
 
 #include <iostream>
 #include <portaudio.h>
-#include "Metadata.h"
+// #include "Metadata.h"
 
 // init PortAudio
 
-namespace App::Init {
-  void initPortAudio();
+namespace Init {
+  void initPrismaStream();
 
-  void killPortAudio();
+  void killPrismaStream();
 }
