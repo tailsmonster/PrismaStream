@@ -5,9 +5,8 @@
 #include "Metadata.hpp"
 
 
-
 namespace Init {
-  auto DEFAULT_DEVICE = DeviceInit::getDefaultIndex()
+  auto DEFAULT_DEVICE = Device::getDefaultIndex()
   void initPrismaStream() {
     std::cout << "Staring PrismaStream version: " << *version << std::endl;
     PaError err = Pa_Initialize();
@@ -19,8 +18,8 @@ namespace Init {
       std::cout << "PortAudio version: " << Pa_GetVersion() << std::endl;
       std::cout << "Version Info: " << Pa_GetVersionInfo() << std::endl << "" << std::endl;
     }
-    DeviceInit::printAllDevicesInfo(DeviceInit::getDeviceCount());
-    
+    Device::printAllDevicesInfo(Device::getDeviceCount());
+    Device::setDevice(DEFAULT_DEVICE);
   };
 
 

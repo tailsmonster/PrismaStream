@@ -5,11 +5,8 @@
 #include "Stream.hpp"
 
 int main(void) {
-
+  Init::initPrismaStream();
   
-  PaDeviceIndex deviceIndex = initAudio();
-  if (deviceIndex == paNoDevice) 
-    return 1;
   
 
 
@@ -17,6 +14,6 @@ int main(void) {
   int input;
   std::cin >> input;
   
-
+  Init::killPrismaStream();
   return 0;
 }

@@ -3,7 +3,7 @@
 #include "Device.hpp"
 #include "Init.hpp"
 
-namespace App::Device {
+namespace Device {
   int getDeviceCount() {
     int numDevices = Pa_GetDeviceCount();
     if (numDevices < 0) {
@@ -38,8 +38,12 @@ namespace App::Device {
     }
     return defaultIdx;
   };
+
+  void printDeviceInfo(PaDeviceIndex* idx) {
+    std::cout << " | Max Output Channels: " << deviceInfo->maxOutputChannels << std::endl;
+  }
   
-  const PaDeviceInfo* printDeviceInfo(PaDeviceIndex idx) {
+  const PaDeviceInfo* setDevice(PaDeviceIndex* idx) {
     const PaDeviceInfo* deviceInfo = Pa_GetDeviceInfo(idx);
     if (!deviceInfo) {
       std::cerr << "Error: Unable to retrieve device info!" << std::endl;
@@ -53,7 +57,7 @@ namespace App::Device {
       std::cout << "Using output device: " << idx << " - " << deviceInfo->name << std::endl;
     }
   
-    std::cout << " | Max Output Channels: " << deviceInfo->maxOutputChannels << std::endl;
+    printDeviceInfo();
     std::cout << "PortAudio is initialized!" << std::endl;
   
     return deviceInfo;

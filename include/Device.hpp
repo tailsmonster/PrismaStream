@@ -11,6 +11,8 @@ namespace App::Device {
   void printAllDevicesInfo(int numDevices);
   
   PaDeviceIndex getDefaultIndex();
+
+  void printDeviceInfo(PaDeviceIndex* idx);
   
   const PaDeviceInfo* printDeviceInfo(PaDeviceIndex idx);
 
