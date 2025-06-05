@@ -2,6 +2,15 @@
 
 #include <iostream>
 #include <portaudio.h>
+#include "Device.hpp"
 
-// init PortAudio and get the default output device
-PaDeviceIndex initStream();
+
+namespace Stream {
+
+  void playTestTone(PaDeviceIndex deviceIdx);
+
+  bool openStream(const Device::DeviceInfo& deviceInfo);
+
+  void closeStream();
+
+}

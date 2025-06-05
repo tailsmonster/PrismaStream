@@ -16,13 +16,13 @@ namespace Device {
     double defaultLowInputLatency;
     double defaultHighInputLatency;
   };
-
-  int getDeviceCount();
-  void printAllDevicesInfo(int numDevices);
-  PaDeviceIndex getDefaultIndex();
-  void printDeviceInfo(struct DeviceInfo);
-  DeviceInfo getCurrentDeviceInfo();
-  void setDevice(PaDeviceIndex idx);
-  PaDeviceIndex getSelectedDevice();
+ 
+  PaDeviceIndex getDefaultIndex(); // gets the index for the default device
+  int getDeviceCount(); // Returns Number of all Devices 
+  PaDeviceIndex getCurrentDeviceIdx(); //gets the device currently in use's index
+  DeviceInfo getCurrentDeviceInfo(); // returns a struct with all the information of the current device in use. 
+  void printAllDevicesInfo(int numDevices); // Prints Info for all devices
+  void printDeviceInfo(PaDeviceIndex idx, bool isLisingAll = false); // prints the info from a specific device.
+  void setDevice(PaDeviceIndex idx); // sets currently used device to device index
 
 }

@@ -9,7 +9,7 @@ add_executable(PrismaStream
     src/Init.cpp
     src/Device.cpp
     src/Stream.cpp
-    src/.cpp
+    src/Playback.cpp
 )
 
 target_include_directories(PrismaStream PRIVATE include)

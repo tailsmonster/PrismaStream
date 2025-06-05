@@ -1,8 +1,9 @@
 #include <iostream>
 #include <portaudio.h>
 #include "Init.hpp"
-#include "Device.hpp"
 #include "Metadata.hpp"
+#include "Device.hpp"
+#include "Stream.hpp"
 
 
 namespace Init {
@@ -20,9 +21,11 @@ namespace Init {
     Device::printAllDevicesInfo(Device::getDeviceCount());
     Device::setDevice(Device::getDefaultIndex());
     std::cout << "PortAudio is initialized!" << std::endl;
+    Stream::openStream(Device::getCurrentDeviceInfo());
   };
 
   void killPrismaStream() {
+    Stream::closeStream();
     Pa_Terminate();
   };
 }

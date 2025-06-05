@@ -4,26 +4,8 @@
 #include "Init.hpp"
 
 namespace Device {
-  static PaDeviceIndex selectedDeviceIdx = paNoDevice;
+  static PaDeviceIndex currentDeviceIdx = paNoDevice;
 
-  int getDeviceCount() {
-    int numDevices = Pa_GetDeviceCount();
-    if (numDevices < 0) {
-      std::cerr << "No audio devices found!" << std::endl;
-      std::cerr << "Pa_GetDeviceCount returned" << numDevices << std::endl;
-      Pa_Terminate();
-      return paNoDevice;
-    }
-    return numDevices;
-  };
-  
-  void printAllDevicesInfo(int numDevices) {
-    std::cout << "Number of devices: " << numDevices << std::endl;
-    for (int i = 0; i < numDevices; i++) {
-      const PaDeviceInfo* deviceInfo = Pa_GetDeviceInfo(i);
-      printDeviceInfo(deviceInfo, i);
-    }
-  };
   
   PaDeviceIndex getDefaultIndex() {
     PaDeviceIndex defaultIdx = Pa_GetDefaultOutputDevice();
@@ -34,28 +16,25 @@ namespace Device {
     }
     return defaultIdx;
   };
-
-  void printDeviceInfo(const PaDeviceInfo* deviceInfo, PaDeviceIndex idx = -1) {
-    if (idx>0 ) {
-      std::cout << idx <<") ";
+  
+  int getDeviceCount() {
+    int numDevices = Pa_GetDeviceCount();
+    if (numDevices < 0) {
+      std::cerr << "No audio devices found!" << std::endl;
+      std::cerr << "Pa_GetDeviceCount returned" << numDevices << std::endl;
+      Pa_Terminate();
+      return paNoDevice;
     }
-    if (deviceInfo) { 
-      std::cout << deviceInfo->name << ": "   << std::endl
-      << " | Max Output Channels: " << deviceInfo->maxOutputChannels  << std::endl
-      << " | Max Input Channels: " << deviceInfo->maxInputChannels  << std::endl
-      << " | Default Low Output Latency: " << deviceInfo->defaultLowOutputLatency  << std::endl
-      << " | Default High Output Latency: " << deviceInfo->defaultHighOutputLatency  << std::endl
-      << " | Default Low Input Latency: " << deviceInfo->defaultLowOInputLatency  << std::endl
-      << " | Default High Input Latency: " << deviceInfo->defaultLowInputLatency  << std::endl
-      << "" << std::endl;
-    } else {
-      std::cerr << "Failed to retrieve device info" << std::endl;
-    }
-  }
+    return numDevices;
+  };
 
+  PaDeviceIndex getCurrentDeviceIdx() {
+    return currentDeviceIdx;
+  };
+  
   DeviceInfo getCurrentDeviceInfo() {
     DeviceInfo device;
-    const PaDeviceInfo* deviceInfo = Pa_GetDeviceInfo(selectedDeviceIdx);
+    const PaDeviceInfo* deviceInfo = Pa_GetDeviceInfo(currentDeviceIdx);
 
     device.name = deviceInfo->name;
     device.maxOutputChannels = deviceInfo->maxOutputChannels;
@@ -66,7 +45,34 @@ namespace Device {
     device.defaultLowInputLatency = deviceInfo->defaultLowInputLatency;
     device.defaultHighInputLatency = deviceInfo->defaultHighInputLatency;
     return device;
-  }
+  };
+  
+  void printDeviceInfo(PaDeviceIndex idx, bool isLisingAll) {
+    const PaDeviceInfo* deviceInfo = Pa_GetDeviceInfo(idx);
+    if (isLisingAll) {
+      std::cout << idx <<") ";
+    }
+    if (deviceInfo) { 
+      std::cout << deviceInfo->name << ": "   << std::endl
+      << " | Max Output Channels: " << deviceInfo->maxOutputChannels  << std::endl
+      << " | Max Input Channels: " << deviceInfo->maxInputChannels  << std::endl
+      << " | Default Low Output Latency: " << deviceInfo->defaultLowOutputLatency  << std::endl
+      << " | Default High Output Latency: " << deviceInfo->defaultHighOutputLatency  << std::endl
+      << " | Default Low Input Latency: " << deviceInfo->defaultLowInputLatency  << std::endl
+      << " | Default High Input Latency: " << deviceInfo->defaultHighInputLatency  << std::endl
+      << "" << std::endl;
+    } else {
+      std::cerr << "Failed to retrieve device info" << std::endl;
+    }
+  };
+
+  void printAllDevicesInfo(int numDevices) {
+    std::cout << "Number of devices: " << numDevices << std::endl;
+    for (int i = 0; i < numDevices; i++) {
+      printDeviceInfo(i, true);
+    }
+  };
+
   
   void setDevice(PaDeviceIndex idx) {
     const PaDeviceInfo* deviceInfo = Pa_GetDeviceInfo(idx);
@@ -75,17 +81,12 @@ namespace Device {
       Pa_Terminate();
       return;
     }
-    selectedDeviceIdx = idx;
+    currentDeviceIdx = idx;
     if (idx == getDefaultIndex()) {
       std::cout << "Using DEFAULT output device: " << idx << " - " << deviceInfo->name << std::endl;
     } else {
       std::cout << "Using output device: " << idx << " - " << deviceInfo->name << std::endl;
     }
-    printDeviceInfo(deviceInfo);
-  }
-  
-  PaDeviceIndex getSelectedDeviceIdx() {
-    return selectedDeviceIdx;
-  }
-
+    printDeviceInfo(idx);
+  };
 }
