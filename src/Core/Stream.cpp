@@ -5,7 +5,7 @@
 #include <iostream>
 #include <cmath>
 #include <portaudio.h>
-#include "Device.hpp"
+#include "Core/Device.hpp"
 /*
   So chat,,,, what are we doing?
   Now that we have an audio sink to use, it's time to actually open a sink and play some music. 

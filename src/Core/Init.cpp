@@ -1,9 +1,9 @@
 #include <iostream>
 #include <portaudio.h>
-#include "Init.hpp"
+#include "Core/Init.hpp"
+#include "Core/Device.hpp"
+#include "Core/Stream.hpp"
 #include "Metadata.hpp"
-#include "Device.hpp"
-#include "Stream.hpp"
 
 
 namespace Init {

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <portaudio.h>
-#include "Device.hpp"
-#include "Init.hpp"
+#include "Core/Device.hpp"
+#include "Core/Init.hpp"
 
 namespace Device {
   static PaDeviceIndex currentDeviceIdx = paNoDevice;
