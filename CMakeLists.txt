@@ -4,13 +4,16 @@ project(PrismaStream)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_executable(PrismaStream 
+file(GLOB_RECURSE SOURCES 
     main.cpp
-    src/Core/Init.cpp
-    src/Core/Device.cpp
-    src/Core/Stream.cpp
-    src/Playback.cpp
+    src/*.cpp
+    src/Core/*.cpp
 )
 
-target_include_directories(PrismaStream PRIVATE include)
+add_executable( PrismaStream ${SOURCES})
+
+target_include_directories(PrismaStream PRIVATE 
+    ${CMAKE_SOURCE_DIR}/include
+)
+
 target_link_libraries(PrismaStream PRIVATE portaudio)
